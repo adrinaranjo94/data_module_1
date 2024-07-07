@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  jupyter:
+    image: continuumio/anaconda3
+    container_name: jupyter-anaconda
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/opt/notebooks
+    command: >
+      /bin/bash -c "source activate base && 
+      jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --notebook-dir=/opt/notebooks"
