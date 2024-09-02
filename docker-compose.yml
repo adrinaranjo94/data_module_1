@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   jupyter:
@@ -8,3 +8,12 @@ services:
       - "8888:8888"
     volumes:
       - ./notebooks:/opt/notebooks
+  db:
+    build:
+      context: ./etl
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ETL
+    ports:
+      - "3306:3306"

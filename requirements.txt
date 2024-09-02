@@ -3,3 +3,4 @@ seaborn
 matplotlib
 scipy
 pandas
+mysql-connector-python=8.0.12
