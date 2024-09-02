@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ETL
+    ports:
+      - "3306:3306"
+    networks:
+      - net
+  jupyter:
+    build:
+      context: ./jupyter # Ruta al directorio que contiene el Dockerfile
+      dockerfile: Dockerfile # Nombre del Dockerfile si es diferente
+    container_name: jupyter_etl_notebook
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./jupyter/notebooks:/app/notebooks
+    depends_on:
+      - db
+    networks:
+      - net
+
+networks:
+  net:
+    driver: bridge
